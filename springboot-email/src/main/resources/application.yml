@@ -1,0 +1,10 @@
+server:
+  port: 10529
+spring:
+  application:
+    name: springboot-email
+  mail:
+    host: smtp.qq.com                       #邮件服务器地址，以qq邮箱为例
+    username: 1647731302@qq.com             #发件人邮箱地址
+    password: kbzfyackyjoacdja              #这个密码是邮箱设置里SMTP服务生成的授权码
+    default-encoding: UTF-8
