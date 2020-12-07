@@ -1,0 +1,5 @@
+server:
+  port: 10515
+spring:
+  application:
+    name: springboot-aop-log

@@ -1,0 +1,5 @@
+server:
+  port: 10517
+spring:
+  application:
+    name: springboot-swagger2

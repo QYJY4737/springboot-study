@@ -1,0 +1,5 @@
+server:
+  port: 10511
+spring:
+  application:
+    name: springboot-echarts
