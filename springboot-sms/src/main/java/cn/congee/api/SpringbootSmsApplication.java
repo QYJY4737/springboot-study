@@ -1,5 +1,6 @@
 package cn.congee.api;
 
+import cn.congee.api.utils.PortUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @Slf4j
 @SpringBootApplication
 public class SpringbootSmsApplication extends SpringBootServletInitializer {
+
+    static {
+        PortUtils.checkPort(6379, "Redis 服务端", true);
+    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
