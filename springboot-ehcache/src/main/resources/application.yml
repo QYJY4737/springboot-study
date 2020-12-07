@@ -1,0 +1,21 @@
+server:
+  port: 10524
+spring:
+  application:
+    name: springboot-ehcache
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.10.101:3306/ehcache?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+# \u5F00\u542F\u9A7C\u5CF0\u5F0F\u547D\u540D\u8F6C\u6362\uFF0C\u6620\u5C04\u5173\u7CFB\uFF1Auser_name-->userName
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+# \u6253\u5370sql
+logging:
+  level:
+    cn.tellsea.mapper: debug
