@@ -1,0 +1,29 @@
+server:
+  port: 10528
+spring:
+  application:
+    name: springboot-jwt-rsa
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.10.101:3306/jwt?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+###########################mybatis配置###############################
+#全局映射器启用缓存
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.congee.api.entity
+  configuration:
+    default-statement-timeout: 25000 #数据库执行超时时间
+    default-executor-type: reuse #对于批量更新操作缓存SQL以提高性能
+    multiple-result-sets-enabled: true #允许返回不同的结果集以达到通用的效果
+    aggressive-lazy-loading: false #按需加载字段(加载字段由SQL指定),不会加载关联表的所有字段,以提高性能
+    lazy-loading-enabled: false #查询时,关闭关联对象及时加载以提高性能
+    cache-enabled: true #全局映射器启用缓存
+congee:
+  jwt:
+    secret: tellsea@Login(Auth}*^31)&Tellsea%
+    pubKeyPath: D:/Temp/rsa.pub
+    priKeyPath: D:/Temp/rsa.pri
+    expire: 30
+    cookieName: TELLSEA_TOKEN
