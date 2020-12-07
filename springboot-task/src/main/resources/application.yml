@@ -1,0 +1,5 @@
+server:
+  port: 10522
+spring:
+  application:
+    name: springboot-task
