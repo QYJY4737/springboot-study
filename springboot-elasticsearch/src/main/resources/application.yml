@@ -1,0 +1,13 @@
+server:
+  port: 10534
+#elasticsearch 配置：
+elasticsearch:
+  address: 127.17.0.3:9200  #如果是集群，用逗号隔开
+  connect-timeout: 1000   #连接超时时间
+  socket-timeout: 30000   #连接超时时间
+  connection-request-timeout: 500
+  max-connect-num: 100
+  max-connect-per-route: 100
+spring:
+  application:
+    name: springboot-elasticsearch
