@@ -1,4 +1,4 @@
-package cn.congee.api.entity;
+package cn.congee.api.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
