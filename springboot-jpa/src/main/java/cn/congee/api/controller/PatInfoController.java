@@ -1,6 +1,6 @@
 package cn.congee.api.controller;
 
-import cn.congee.api.entity.PatInfo;
+import cn.congee.api.domain.entity.PatInfo;
 import cn.congee.api.service.PatInfoService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
