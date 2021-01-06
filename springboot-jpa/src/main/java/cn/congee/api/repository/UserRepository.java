@@ -1,6 +1,6 @@
 package cn.congee.api.repository;
 
-import cn.congee.api.entity.User;
+import cn.congee.api.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 /**
