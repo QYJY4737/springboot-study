@@ -52,3 +52,15 @@ INSERT INTO glonk_slave.pat_info (id, name, pass, age, gender, address, phone, i
 INSERT INTO glonk_slave.pat_info (id, name, pass, age, gender, address, phone, idno, birth, createtime, updatetime, extendparam, create_time, extend_param, id_no, update_time) VALUES (3, '赵文静', '151636', 15, '女', '测试地址山西', '15909208549', '140881200612060186', '2006-12-06 00:00:00', '2021-01-05 16:53:00', '2021-01-05 16:53:00', 'http://qlxw7iho1.hd-bkt.clouddn.com/FrguP7kcna2uvaLT8LmvmIcjxle9', null, null, '', null);
 
 
+2021-1-6-16:47
+建表
+create table if not exists china_regions_info
+(
+    id          int(32)         primary key auto_increment comment '主键ID',
+    code        varchar(200)    not null comment '行政区域编码',
+    name        varchar(200)    not null comment '行政区域名称',
+    type         int(32)        not null comment '行政区域类型,1:省份,2:城市,3:区或者县城',
+    parentcode  varchar(200)    not null comment '上一级行政区域编码'
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT = '全国省市区区域编码表';
+设置唯一索引
+alter table china_regions_info add unique index (id, code);
