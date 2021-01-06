@@ -1,6 +1,6 @@
 package cn.congee.api.repository;
 
-import cn.congee.api.entity.PatInfo;
+import cn.congee.api.domain.entity.PatInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
