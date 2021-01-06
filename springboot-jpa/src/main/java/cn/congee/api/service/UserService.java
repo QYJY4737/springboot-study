@@ -1,6 +1,6 @@
 package cn.congee.api.service;
 
-import cn.congee.api.entity.User;
+import cn.congee.api.domain.entity.User;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
