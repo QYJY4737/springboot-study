@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 用户信息表
@@ -22,9 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "pat_info")
-public class PatInfo implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class PatInfo extends BaseEntity {
 
     /**
      * 用户ID
@@ -96,9 +94,11 @@ public class PatInfo implements Serializable {
     @Column(name = "extendparam")
     private String extendParam;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    /**
+     * 用户认证状态,使用air_auth_state字典
+     */
+    @Column(name = "auth_state_dc")
+    private String authStateDc;
 
     public Integer getId() {
         return id;
@@ -196,9 +196,17 @@ public class PatInfo implements Serializable {
         this.extendParam = extendParam;
     }
 
+    public String getAuthStateDc() {
+        return authStateDc;
+    }
+
+    public void setAuthStateDc(String authStateDc) {
+        this.authStateDc = authStateDc;
+    }
+
     @Override
     public String toString() {
-        return "PatInfo{" +
+        return "PatInfoEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", pass='" + pass + '\'' +
@@ -211,7 +219,34 @@ public class PatInfo implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", extendParam='" + extendParam + '\'' +
+                ", authStateDc='" + authStateDc + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PatInfo patInfo = (PatInfo) o;
+        return Objects.equals(id, patInfo.id) &&
+                Objects.equals(name, patInfo.name) &&
+                Objects.equals(pass, patInfo.pass) &&
+                Objects.equals(age, patInfo.age) &&
+                Objects.equals(gender, patInfo.gender) &&
+                Objects.equals(address, patInfo.address) &&
+                Objects.equals(phone, patInfo.phone) &&
+                Objects.equals(idNo, patInfo.idNo) &&
+                Objects.equals(birth, patInfo.birth) &&
+                Objects.equals(createTime, patInfo.createTime) &&
+                Objects.equals(updateTime, patInfo.updateTime) &&
+                Objects.equals(extendParam, patInfo.extendParam) &&
+                Objects.equals(authStateDc, patInfo.authStateDc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, pass, age, gender, address, phone, idNo, birth, createTime, updateTime, extendParam, authStateDc);
+    }
+
 }
 
