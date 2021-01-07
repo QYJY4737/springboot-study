@@ -20,9 +20,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "china_regions_info")
-public class ChinaRegionsInfoEntity implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class ChinaRegionsInfoEntity extends BaseEntity {
 
     /**
      * 主键ID
