@@ -1,6 +1,6 @@
 package cn.congee.api.repository;
 
-import cn.congee.api.domain.entity.PatInfo;
+import cn.congee.api.domain.entity.PatInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,11 +14,11 @@ import java.util.List;
  **/
 @Transactional
 @Repository
-public interface PatInfoRepository extends JpaRepository<PatInfo, Integer> {
+public interface PatInfoRepository extends JpaRepository<PatInfoEntity, Integer> {
 
     /**
      * 方法名称必须要遵循驼峰式命名规则，findBy（关键字）+属性名称（首字母大写）+查询条件（首字母大写）
      */
-    List<PatInfo> findByIdNo(String idNo);
+    List<PatInfoEntity> findByIdNo(String idNo);
 
 }
