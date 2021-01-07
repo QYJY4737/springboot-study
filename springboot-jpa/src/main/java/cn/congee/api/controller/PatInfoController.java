@@ -1,12 +1,12 @@
 package cn.congee.api.controller;
 
+import cn.congee.api.common.resp.ResponseDTO;
 import cn.congee.api.domain.entity.PatInfo;
 import cn.congee.api.service.PatInfoService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,33 +29,35 @@ public class PatInfoController {
     private PatInfoService patInfoService;
 
     @PostMapping("/addPat")
-    public String savePatInfo(@RequestBody PatInfo patInfo){
+    public ResponseDTO savePatInfo(@RequestBody PatInfo patInfo){
         boolean flag = patInfoService.savePatInfo(patInfo);
         log.info("添加用户信息结果为: " + flag);
-        return Boolean.TRUE.equals(flag) ? "添加成功" : "添加失败";
+        return new ResponseDTO(flag);
     }
 
     @DeleteMapping("/delPat/{id}")
-    public String deletePatInfoById(@PathVariable(value = "id") Integer id){
+    public ResponseDTO deletePatInfoById(@PathVariable(value = "id") Integer id){
         boolean flag = patInfoService.deletePatInfoById(id);
         log.info("删除用户信息结果为: " + flag);
-        return Boolean.TRUE.equals(flag) ? "删除成功" : "删除失败";
+        return new ResponseDTO(flag);
     }
 
     @GetMapping("/selAll")
-    public String findAll(){
+    public ResponseDTO<List<PatInfo>> findAll(){
         List<PatInfo> patInfoList = patInfoService.findAll();
         log.info("查询所有用户信息结果为: " + JSON.toJSONString(patInfoList));
         List<String> names = patInfoList.stream().map(PatInfo::getName).collect(Collectors.toList());
         names.stream().forEach(e -> System.out.println(e));
-        return !CollectionUtils.isEmpty(patInfoList) ? names.toString() : "查询所有失败";
+        List<String> authStateDcList = patInfoList.stream().map(PatInfo::getAuthStateDc).collect(Collectors.toList());
+        authStateDcList.stream().forEach(o -> System.out.println(o));
+        return new ResponseDTO<>(patInfoList);
     }
 
     @GetMapping("/selOne")
-    public String findById(@RequestParam(value = "id") Integer id){
+    public ResponseDTO<PatInfo> findById(@RequestParam(value = "id") Integer id){
         PatInfo patInfo = patInfoService.findById(id);
         log.info("查询某个用户信息结果为: " + JSON.toJSONString(patInfo));
-        return null != patInfo ? patInfo.toString() : "查询某个失败";
+        return new ResponseDTO<>(patInfo);
     }
 
     /*@GetMapping("/selKey")
@@ -68,14 +70,14 @@ public class PatInfoController {
     }*/
 
     @PostMapping("/updPat")
-    public String updatePatInfo(@RequestBody PatInfo patInfo){
+    public ResponseDTO updatePatInfo(@RequestBody PatInfo patInfo){
         boolean flag = patInfoService.updatePatInfo(patInfo);
         log.info("更新用户信息结果为: " + flag);
-        return Boolean.TRUE.equals(flag) ? "更新成功" : "更新失败";
+        return new ResponseDTO(flag);
     }
 
     @GetMapping("/paging/{page}/{size}")
-    public String pagingQuery(@PathVariable(value = "page") Integer page, @PathVariable(value = "size") Integer size){
+    public ResponseDTO<Page<PatInfo>> pagingQuery(@PathVariable(value = "page") Integer page, @PathVariable(value = "size") Integer size){
         Page<PatInfo> patInfos = null;
         try{
             patInfos = patInfoService.pagingQuery(page, size);
@@ -84,7 +86,7 @@ public class PatInfoController {
             log.error("分页查询报错: " + e.getMessage());
             e.printStackTrace();
         }
-        return null != patInfos ? JSON.toJSONString(patInfos.getContent()) : "分页查询失败";
+        return new ResponseDTO<>(patInfos);
     }
 
 }
