@@ -1,7 +1,7 @@
 package cn.congee.api.controller;
 
 import cn.congee.api.common.resp.ResponseDTO;
-import cn.congee.api.domain.entity.PatInfo;
+import cn.congee.api.domain.entity.PatInfoEntity;
 import cn.congee.api.service.PatInfoService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +29,8 @@ public class PatInfoController {
     private PatInfoService patInfoService;
 
     @PostMapping("/addPat")
-    public ResponseDTO savePatInfo(@RequestBody PatInfo patInfo){
-        boolean flag = patInfoService.savePatInfo(patInfo);
+    public ResponseDTO savePatInfo(@RequestBody PatInfoEntity patInfoEntity){
+        boolean flag = patInfoService.savePatInfo(patInfoEntity);
         log.info("添加用户信息结果为: " + flag);
         return new ResponseDTO(flag);
     }
@@ -43,21 +43,21 @@ public class PatInfoController {
     }
 
     @GetMapping("/selAll")
-    public ResponseDTO<List<PatInfo>> findAll(){
-        List<PatInfo> patInfoList = patInfoService.findAll();
-        log.info("查询所有用户信息结果为: " + JSON.toJSONString(patInfoList));
-        List<String> names = patInfoList.stream().map(PatInfo::getName).collect(Collectors.toList());
+    public ResponseDTO<List<PatInfoEntity>> findAll(){
+        List<PatInfoEntity> patInfoEntityList = patInfoService.findAll();
+        log.info("查询所有用户信息结果为: " + JSON.toJSONString(patInfoEntityList));
+        List<String> names = patInfoEntityList.stream().map(PatInfoEntity::getName).collect(Collectors.toList());
         names.stream().forEach(e -> System.out.println(e));
-        List<String> authStateDcList = patInfoList.stream().map(PatInfo::getAuthStateDc).collect(Collectors.toList());
+        List<String> authStateDcList = patInfoEntityList.stream().map(PatInfoEntity::getAuthStateDc).collect(Collectors.toList());
         authStateDcList.stream().forEach(o -> System.out.println(o));
-        return new ResponseDTO<>(patInfoList);
+        return new ResponseDTO<>(patInfoEntityList);
     }
 
     @GetMapping("/selOne")
-    public ResponseDTO<PatInfo> findById(@RequestParam(value = "id") Integer id){
-        PatInfo patInfo = patInfoService.findById(id);
-        log.info("查询某个用户信息结果为: " + JSON.toJSONString(patInfo));
-        return new ResponseDTO<>(patInfo);
+    public ResponseDTO<PatInfoEntity> findById(@RequestParam(value = "id") Integer id){
+        PatInfoEntity patInfoEntity = patInfoService.findById(id);
+        log.info("查询某个用户信息结果为: " + JSON.toJSONString(patInfoEntity));
+        return new ResponseDTO<>(patInfoEntity);
     }
 
     /*@GetMapping("/selKey")
@@ -70,15 +70,15 @@ public class PatInfoController {
     }*/
 
     @PostMapping("/updPat")
-    public ResponseDTO updatePatInfo(@RequestBody PatInfo patInfo){
-        boolean flag = patInfoService.updatePatInfo(patInfo);
+    public ResponseDTO updatePatInfo(@RequestBody PatInfoEntity patInfoEntity){
+        boolean flag = patInfoService.updatePatInfo(patInfoEntity);
         log.info("更新用户信息结果为: " + flag);
         return new ResponseDTO(flag);
     }
 
     @GetMapping("/paging/{page}/{size}")
-    public ResponseDTO<Page<PatInfo>> pagingQuery(@PathVariable(value = "page") Integer page, @PathVariable(value = "size") Integer size){
-        Page<PatInfo> patInfos = null;
+    public ResponseDTO<Page<PatInfoEntity>> pagingQuery(@PathVariable(value = "page") Integer page, @PathVariable(value = "size") Integer size){
+        Page<PatInfoEntity> patInfos = null;
         try{
             patInfos = patInfoService.pagingQuery(page, size);
             log.info("分页查询用户信息结果为: " + JSON.toJSONString(patInfos.getContent()));
