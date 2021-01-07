@@ -1,6 +1,6 @@
 package cn.congee.api.service;
 
-import cn.congee.api.domain.entity.PatInfo;
+import cn.congee.api.domain.entity.PatInfoEntity;
 import cn.congee.api.repository.PatInfoRepository;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -29,14 +29,14 @@ public class PatInfoService {
 
     /**
      * 添加用户
-     * @param patInfo
+     * @param patInfoEntity
      * @return
      */
-    public boolean savePatInfo(PatInfo patInfo) {
-        log.info("开始调用保存用户信息入参为patInfo=[{}]", JSON.toJSONString(patInfo));
+    public boolean savePatInfo(PatInfoEntity patInfoEntity) {
+        log.info("开始调用保存用户信息入参为patInfo=[{}]", JSON.toJSONString(patInfoEntity));
         boolean flag = false;
-        if(patInfo != null){
-            PatInfo info = patInfoRepository.save(patInfo);
+        if(patInfoEntity != null){
+            PatInfoEntity info = patInfoRepository.save(patInfoEntity);
             if(info != null){
                 flag = Boolean.TRUE;
             }
@@ -59,7 +59,7 @@ public class PatInfoService {
              * 注:删除是以键为准进行删除的,即:不论模型中的其他属性是否与表中数据对应的
              * 上,只要主键对应的上,那么就会删除表中对应行的数据
              */
-            PatInfo build = PatInfo.builder().id(id).build();
+            PatInfoEntity build = PatInfoEntity.builder().id(id).build();
             patInfoRepository.delete(build);
             //patInfoRepository.deleteById(id);
             flag = Boolean.TRUE;
@@ -72,11 +72,11 @@ public class PatInfoService {
      * 查询所有
      * @return
      */
-    public List<PatInfo> findAll() {
+    public List<PatInfoEntity> findAll() {
         log.info("开始调用查询所有用户信息");
-        List<PatInfo> patInfoList = patInfoRepository.findAll();
-        log.info("开始调用查询所有用户信息出参为patInfoList=[{}]", JSON.toJSONString(patInfoList));
-        return CollectionUtils.isEmpty(patInfoList) ? null : patInfoList;
+        List<PatInfoEntity> patInfoEntityList = patInfoRepository.findAll();
+        log.info("开始调用查询所有用户信息出参为patInfoList=[{}]", JSON.toJSONString(patInfoEntityList));
+        return CollectionUtils.isEmpty(patInfoEntityList) ? null : patInfoEntityList;
     }
 
     /**
@@ -84,17 +84,17 @@ public class PatInfoService {
      * @param id
      * @return
      */
-    public PatInfo findById(Integer id) {
+    public PatInfoEntity findById(Integer id) {
         log.info("开始调用根据id查询用户信息入参为id=[{}]", id);
-        PatInfo patInfo = null;
+        PatInfoEntity patInfoEntity = null;
         if(null != id ){
-            Optional<PatInfo> optional = patInfoRepository.findById(id);
+            Optional<PatInfoEntity> optional = patInfoRepository.findById(id);
             if(optional != null){
-                patInfo = optional.get();
+                patInfoEntity = optional.get();
             }
         }
-        log.info("开始调用根据id查询用户信息出参为patInfo=[{}]", JSON.toJSONString(patInfo));
-        return patInfo;
+        log.info("开始调用根据id查询用户信息出参为patInfo=[{}]", JSON.toJSONString(patInfoEntity));
+        return patInfoEntity;
     }
 
     /**
@@ -118,32 +118,32 @@ public class PatInfoService {
 
     /**
      * 修改用户
-     * @param patInfo
+     * @param patInfoEntity
      * @return
      */
-    public boolean updatePatInfo(PatInfo patInfo) {
-        log.info("开始调用更新用户信息入参为patInfo=[{}]", JSON.toJSONString(patInfo));
+    public boolean updatePatInfo(PatInfoEntity patInfoEntity) {
+        log.info("开始调用更新用户信息入参为patInfo=[{}]", JSON.toJSONString(patInfoEntity));
         boolean flag = false;
-        PatInfo info = new PatInfo();
-        if(patInfo != null && patInfo.getId() != null){
+        PatInfoEntity info = new PatInfoEntity();
+        if(patInfoEntity != null && patInfoEntity.getId() != null){
             //如果存在,则进行修改
-            boolean exist = patInfoRepository.existsById(patInfo.getId());
+            boolean exist = patInfoRepository.existsById(patInfoEntity.getId());
             if(exist){
                 //通过覆盖式新增的方式,实现改
-                PatInfo build = PatInfo.builder().id(patInfo.getId())
-                        .name(patInfo.getName())
-                        .pass(patInfo.getPass())
-                        .age(patInfo.getAge())
-                        .gender(patInfo.getGender())
-                        .address(patInfo.getAddress())
-                        .phone(patInfo.getPhone())
-                        .idNo(patInfo.getIdNo())
-                        .birth(patInfo.getBirth())
-                        .createTime(patInfo.getCreateTime())
-                        .updateTime(patInfo.getUpdateTime())
-                        .extendParam(patInfo.getExtendParam())
+                PatInfoEntity build = PatInfoEntity.builder().id(patInfoEntity.getId())
+                        .name(patInfoEntity.getName())
+                        .pass(patInfoEntity.getPass())
+                        .age(patInfoEntity.getAge())
+                        .gender(patInfoEntity.getGender())
+                        .address(patInfoEntity.getAddress())
+                        .phone(patInfoEntity.getPhone())
+                        .idNo(patInfoEntity.getIdNo())
+                        .birth(patInfoEntity.getBirth())
+                        .createTime(patInfoEntity.getCreateTime())
+                        .updateTime(patInfoEntity.getUpdateTime())
+                        .extendParam(patInfoEntity.getExtendParam())
                         .build();
-                PatInfo save = patInfoRepository.save(build);
+                PatInfoEntity save = patInfoRepository.save(build);
                 if(save != null){
                     flag = Boolean.TRUE;
                 }
@@ -161,10 +161,10 @@ public class PatInfoService {
      * @return
      * @throws Exception
      */
-    public Page<PatInfo> pagingQuery(Integer page, Integer size) throws Exception{
+    public Page<PatInfoEntity> pagingQuery(Integer page, Integer size) throws Exception{
         Sort.Order order = new Sort.Order(Sort.Direction.DESC, "createTime").nullsLast();
         Pageable pageable = PageRequest.of(page, size, Sort.by(order));
-        Page<PatInfo> patInfos = patInfoRepository.findAll(pageable);
+        Page<PatInfoEntity> patInfos = patInfoRepository.findAll(pageable);
         System.out.println("数据的总条数：" + patInfos.getTotalElements());
         System.out.println("总页数：" + patInfos.getTotalPages());
         System.out.println("返回data: " + patInfos.getContent());
