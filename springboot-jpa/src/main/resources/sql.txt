@@ -64,3 +64,30 @@ create table if not exists china_regions_info
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT = '全国省市区区域编码表';
 设置唯一索引
 alter table china_regions_info add unique index (id, code);
+
+
+2021-1-7-15:52
+建表
+create table if not exists dic_stan
+(
+    id          int(32)         primary key auto_increment comment '主键ID',
+    dic_code    varchar(255)      not null comment '字典类别编码',
+    code        varchar(255)      not null comment '字典项编码',
+    name        varchar(255)      comment '字典项值',
+    sort        integer           comment '顺序号',
+    state       varchar(255)      comment '状态',
+    keyword     varchar(255)      comment '搜索关键字',
+    read_only   integer           comment '只读标志 0：只读 2：读写',
+    create_time datetime          comment '创建时间',
+    update_time datetime          comment '更新时间',
+    comments    text              comment '备注',
+    add_info    varchar(255)      comment '附加信息，可能有多个，以json存储'
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT = '标准字典表';
+设置唯一索引
+alter table dic_stan add unique index (id, dic_code);
+
+
+INSERT INTO glonk_slave.dic_stan (id, dic_code, code, name, sort, state, keyword, `read_only`, create_time, update_time, comments, add_info) VALUES (1, 'air_auth_state', '1', '未认证', 1, '1', 'wrz|weirenzheng', 0, '2021-01-07 14:17:00', '2021-01-07 14:17:00', '用户认证状态字典', '附加信息');
+INSERT INTO glonk_slave.dic_stan (id, dic_code, code, name, sort, state, keyword, `read_only`, create_time, update_time, comments, add_info) VALUES (2, 'air_auth_state', '2', '认证中', 2, '1', 'rzz|renzhengzhong', 0, '2021-01-07 14:17:00', '2021-01-07 14:17:00', '用户认证状态字典', '附加信息');
+INSERT INTO glonk_slave.dic_stan (id, dic_code, code, name, sort, state, keyword, `read_only`, create_time, update_time, comments, add_info) VALUES (3, 'air_auth_state', '3', '已认证', 3, '1', 'yrz|yirenzheng', 0, '2021-01-07 14:17:00', '2021-01-07 14:17:00', '用户认证状态字典', '附加信息');
+INSERT INTO glonk_slave.dic_stan (id, dic_code, code, name, sort, state, keyword, `read_only`, create_time, update_time, comments, add_info) VALUES (4, 'air_auth_state', '4', '认证失败', 4, '1', 'rzsb|renzhengshibai', 0, '2021-01-07 14:17:00', '2021-01-07 14:17:00', '用户认证状态字典', '附加信息');
