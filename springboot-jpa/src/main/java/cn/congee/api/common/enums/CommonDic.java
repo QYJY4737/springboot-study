@@ -17,7 +17,7 @@ public final class CommonDic {
      */
     public enum AuthStateDic implements BaseDic {
         /**
-         *
+         * 认证状态
          */
         NOT_AUTH("1", "未认证"),
         AUTHING("2", "认证中"),
