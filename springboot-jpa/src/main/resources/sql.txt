@@ -41,6 +41,10 @@ create table if not exists pat_info
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT = '用户信息表';
 设置唯一索引
 alter table pat_info add unique index (id, idno);
+添加认证状态字段
+alter table glonk_slave.pat_info add auth_state_dc varchar(64) comment '用户认证状态,使用air_auth_state字典';
+更新历史用户数据认证状态
+update glonk_slave.pat_info set pat_info.auth_state_dc = '3' where pat_info.auth_state_dc is null;
 
 1	陈怡	111111c	26	女	测试地址	18592076690	61042419940524612X	1994-05-24 00:00:00	2020-12-26 10:28:20	2020-12-26 10:28:20	http://qlxw7iho1.hd-bkt.clouddn.com/FrguP7kcna2uvaLT8LmvmIcjxle9
 2	王林欢	141712	22	女	测试地址山西	17635589549	142702199802182710	1998-02-18 00:00:00	2021-01-04 17:13:00	2021-01-04 17:13:00	http://qlxw7iho1.hd-bkt.clouddn.com/FrguP7kcna2uvaLT8LmvmIcjxle9
