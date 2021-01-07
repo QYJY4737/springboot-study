@@ -22,7 +22,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "pat_info")
-public class PatInfo extends BaseEntity {
+public class PatInfoEntity extends BaseEntity {
 
     /**
      * 用户ID
@@ -227,20 +227,20 @@ public class PatInfo extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PatInfo patInfo = (PatInfo) o;
-        return Objects.equals(id, patInfo.id) &&
-                Objects.equals(name, patInfo.name) &&
-                Objects.equals(pass, patInfo.pass) &&
-                Objects.equals(age, patInfo.age) &&
-                Objects.equals(gender, patInfo.gender) &&
-                Objects.equals(address, patInfo.address) &&
-                Objects.equals(phone, patInfo.phone) &&
-                Objects.equals(idNo, patInfo.idNo) &&
-                Objects.equals(birth, patInfo.birth) &&
-                Objects.equals(createTime, patInfo.createTime) &&
-                Objects.equals(updateTime, patInfo.updateTime) &&
-                Objects.equals(extendParam, patInfo.extendParam) &&
-                Objects.equals(authStateDc, patInfo.authStateDc);
+        PatInfoEntity patInfoEntity = (PatInfoEntity) o;
+        return Objects.equals(id, patInfoEntity.id) &&
+                Objects.equals(name, patInfoEntity.name) &&
+                Objects.equals(pass, patInfoEntity.pass) &&
+                Objects.equals(age, patInfoEntity.age) &&
+                Objects.equals(gender, patInfoEntity.gender) &&
+                Objects.equals(address, patInfoEntity.address) &&
+                Objects.equals(phone, patInfoEntity.phone) &&
+                Objects.equals(idNo, patInfoEntity.idNo) &&
+                Objects.equals(birth, patInfoEntity.birth) &&
+                Objects.equals(createTime, patInfoEntity.createTime) &&
+                Objects.equals(updateTime, patInfoEntity.updateTime) &&
+                Objects.equals(extendParam, patInfoEntity.extendParam) &&
+                Objects.equals(authStateDc, patInfoEntity.authStateDc);
     }
 
     @Override
