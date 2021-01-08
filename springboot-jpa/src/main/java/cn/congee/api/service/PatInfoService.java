@@ -79,7 +79,7 @@ public class PatInfoService {
         List<PatInfoEntity> patInfoEntityList = patInfoRepository.findAll();
         patInfoEntityList.stream().forEach(e -> {
             Map<String, Object> map = new HashMap<>();
-            map.put("extendParam", "花径不曾缘客扫，蓬门今始为君开");
+            map.put("poem", "花径不曾缘客扫，蓬门今始为君开");
             e.setExtendParam(map.toString());
             patInfoRepository.saveAndFlush(e);
         });
