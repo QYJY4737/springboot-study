@@ -12,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -75,6 +77,12 @@ public class PatInfoService {
     public List<PatInfoEntity> findAll() {
         log.info("开始调用查询所有用户信息");
         List<PatInfoEntity> patInfoEntityList = patInfoRepository.findAll();
+        patInfoEntityList.stream().forEach(e -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("extendParam", "花径不曾缘客扫，蓬门今始为君开");
+            e.setExtendParam(map.toString());
+            patInfoRepository.saveAndFlush(e);
+        });
         log.info("开始调用查询所有用户信息出参为patInfoList=[{}]", JSON.toJSONString(patInfoEntityList));
         return CollectionUtils.isEmpty(patInfoEntityList) ? null : patInfoEntityList;
     }
